@@ -86,3 +86,57 @@ This file accumulates your best interview stories over time. Each evaluation (Bl
 **R:** 20% triage consistency gain; 18% false-positive reduction; standard applied uniformly regardless of analyst experience level
 **Reflection:** A policy that isn't enforced is just a document. Automation converts a written standard into an operational reality. This framing applies directly to cybersecurity standards work — the goal isn't to write a good document, it's to change behavior at scale.
 **Best for questions about:** policy enforcement, standards adoption, automation, process improvement, measurable behavior change
+
+### [SIEM Tuning] Alert Threshold Optimization at Charles Schwab
+**Source:** Report #057 — Sentara Healthcare — Cybersecurity Analyst (Remote)
+**S:** 3,500+ daily security events in Splunk ES generating noise; alert fatigue starting to affect triage quality across the SOC team
+**T:** Reduce false-positive escalations without losing real threat signals
+**A:** Audited existing correlation rules; identified thresholds generating noise versus signal; tuned logic iteratively with 2-week feedback cycles tracking escalation rates before and after each change
+**R:** 18% reduction in false-positive escalations; triage quality sustained at high volume
+**Reflection:** Document the tuning rationale for every rule change — otherwise the next analyst re-learns what you already tested and paid for
+**Best for questions about:** SIEM tuning, alert fatigue, data-driven process improvement, iterative optimization, measurable impact
+
+### [Compliance Bridge] HIPAA-Adjacent Audit Readiness at Charles Schwab
+**Source:** Report #057 — Sentara Healthcare — Cybersecurity Analyst (Remote)
+**S:** 15+ high-severity incidents required complete audit documentation aligned to NIST CSF and SOC 2 control requirements
+**T:** Demonstrate that controls functioned as designed during each incident — audit-ready output without slowing the response
+**A:** Treated documentation as a parallel track during IR — logged containment steps, evidence screenshots, RCA, and control-mapping annotations in real time
+**R:** All evidence accepted by auditors without rework or supplemental requests; SOC 2 compliance maintained
+**Reflection:** NIST CSF and HIPAA Security Rule map to the same control categories — the documentation discipline is identical. Financial services compliance is a direct bridge to healthcare regulatory requirements.
+**Best for questions about:** compliance, audit readiness, HIPAA, documentation discipline, working under pressure, regulatory alignment
+
+### [On-Call / Endpoint IR] Structured Endpoint Response at Charles Schwab
+**Source:** Report #057 — Sentara Healthcare — Cybersecurity Analyst (Remote)
+**S:** 60+ endpoint incidents requiring timely isolation and coordinated response in CrowdStrike Falcon, some requiring off-hours escalation
+**T:** Contain endpoint compromise quickly to prevent lateral movement while coordinating with IT teams
+**A:** Applied structured isolation procedures in CrowdStrike Falcon; pre-built runbooks for common containment scenarios; coordinated network-level containment with infrastructure teams in parallel
+**R:** Consistent containment times; no documented lateral movement events in cases handled
+**Reflection:** On-call readiness is a system, not just availability — pre-authorized response actions and runbooks reduce friction when response speed matters most
+**Best for questions about:** endpoint security, incident response, on-call rotation, SOC operations, cross-team coordination
+
+### [GRC / Framework Mapping] ISO 27001 Coverage Expansion at M&T Bank
+**Source:** Report #059 — McLane Company — Cyber Risk Analyst
+**S:** QRadar SIEM at M&T Bank with limited detection use-case coverage; gaps existed relative to ISO 27001 Annex A control requirements
+**T:** Expand coverage systematically, prioritizing gaps with highest control risk to improve both detection posture and audit evidence
+**A:** Mapped existing detection rules against ISO 27001 Annex A controls; identified 12+ uncovered use cases; built new correlation rules; documented rationale tied directly to framework requirements for each new use case
+**R:** 10% expanded SIEM coverage across 12+ use cases; improved audit evidence quality for ISO 27001 controls
+**Reflection:** Framework-to-control mapping is a GRC skill as much as a technical one — the rigor of mapping detections to Annex A directly applies to policy authorship and standards lifecycle work
+**Best for questions about:** ISO 27001 experience, GRC framework mapping, prioritization, audit readiness, measurable coverage improvement
+
+### [Stakeholder Communication / Cross-Functional] NIST Curriculum Design at Indiana Tech
+**Source:** Report #059 — McLane Company — Cyber Risk Analyst
+**S:** Faculty at Indiana Tech needed a graduate cybersecurity curriculum aligned to NIST Workforce Framework and accreditation standards — no existing template
+**T:** Research, draft, and present curriculum with learning objectives and rubrics to non-technical academic stakeholders
+**A:** Synthesized data from peer institutions and NIST workforce standards; drafted course descriptions, learning objectives, and assessment rubrics; aligned each to NIST framework components; presented to faculty committee for accreditation review
+**R:** NIST-compliant curriculum accepted for accreditation review; course content adopted for graduate program
+**Reflection:** Translating technical frameworks for non-technical audiences is the core muscle for security awareness work — the output format changes (curriculum vs. awareness content) but the translation skill is identical
+**Best for questions about:** communicating security to non-technical audiences, cross-functional initiative leadership, policy/standards authorship, working with stakeholders at different levels
+
+### [Risk-Based Analysis / Metrics] Vulnerability Prioritization Under Constraints at Cybage
+**Source:** Report #059 — McLane Company — Cyber Risk Analyst
+**S:** 70+ open vulnerabilities at Cybage Software with no consistent prioritization framework — patching was happening in discovery order, not risk order
+**T:** Reduce exposed attack surface using risk-based prioritization rather than volume-first patching
+**A:** Applied CVSS scores combined with active exploit availability research; reclassified backlog by risk priority; coordinated verified patch deployment with infrastructure teams; tracked closure rates by severity tier to demonstrate progress
+**R:** 18% reduction in exposed attack surface; all critical CVEs closed within SLA; remediation completion rate improved 17%
+**Reflection:** Risk-based prioritization (score → rank → act → measure) is the analytical foundation of a Cyber Risk Analyst role — the same mental model applies directly to human risk metrics and awareness program targeting
+**Best for questions about:** data-driven security decisions, measuring risk reduction, prioritization under constraints, cross-team coordination, working with metrics and dashboards
