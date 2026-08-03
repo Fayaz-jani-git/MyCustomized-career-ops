@@ -192,8 +192,17 @@ function launchCloakBrowser() {
 // ── Login wait ───────────────────────────────────────────────────────────────
 
 async function waitForLogin() {
-  const already = ab(['get', 'count', '[data-job-card="true"]'], { allowFail: true });
-  if (already && parseInt(already, 10) > 0) return;
+  // The page is a React SPA — job cards aren't in the DOM the instant
+  // navigation resolves, so a single immediate check here always reads 0
+  // even on an already-authenticated persistent profile, incorrectly
+  // falling through to the interactive prompt below (which then hangs
+  // forever in a background/headless run with no attached stdin). Poll
+  // briefly before concluding a fresh login is actually needed.
+  for (let i = 0; i < 6; i++) {
+    const already = ab(['get', 'count', '[data-job-card="true"]'], { allowFail: true });
+    if (already && parseInt(already, 10) > 0) return;
+    await sleep(1500);
+  }
 
   console.log('\n──────────────────────────────────────────────────');
   console.log('  Sign in with Google in the browser window.');
@@ -222,12 +231,29 @@ function closeFilterPanel() {
 
 function applySearch(query) {
   closeFilterPanel();
-  const filled = ab(['find', 'placeholder', 'Search', 'fill', query], { allowFail: true });
+  // MigrateMate's search placeholder text has changed over time (seen:
+  // "Search" and "Search & find your dream job") and the input is
+  // type="text", not type="search" — an exact-match placeholder lookup or
+  // the input[type="search"] fallback can both silently fail, leaving the
+  // query unapplied and the scraper quietly returning the unfiltered "all
+  // jobs" feed instead of erroring. Try known placeholder variants, then
+  // fall back to the first visible text input, and verify via the ?q=
+  // URL param afterward rather than trusting any single fill call blindly.
+  const placeholders = ['Search & find your dream job', 'Search'];
+  let filled = '';
+  for (const ph of placeholders) {
+    filled = ab(['find', 'placeholder', ph, 'fill', query], { allowFail: true });
+    if (filled !== '') break;
+  }
   if (filled === '') {
-    // fallback: try a generic search input selector
-    ab(['fill', 'input[type="search"]', query], { allowFail: true });
+    ab(['fill', 'input[type="text"]', query], { allowFail: true });
   }
   ab(['press', 'Enter'], { allowFail: true });
+
+  const url = ab(['get', 'url'], { allowFail: true });
+  if (!url || !url.includes('q=')) {
+    console.warn(`  Warning: search for "${query}" may not have applied (URL has no ?q= param: ${url}) — results could be unfiltered.`);
+  }
   console.log(`  Search: "${query}"`);
 }
 
