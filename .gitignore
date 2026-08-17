@@ -2,6 +2,8 @@
 data/applications.md
 data/pipeline.md
 data/scan-history.tsv
+data/followup-sweep.log
+data/followup-sweep.launchd.log
 reports/*.md
 !reports/.gitkeep
 output/*
